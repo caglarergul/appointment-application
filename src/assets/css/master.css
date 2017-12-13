@@ -1,0 +1,16 @@
+.no-padding {
+    padding: 0 !important;
+}
+
+.m-top-40 {margin-top: 40px;}
+.nav-item > a  {
+    text-align: center;
+    padding: 15px 0;
+    font-size: 13px;
+}
+
+.nav-item > a > i  {
+    font-size: 21px
+}
+
+.nav-item {border-right: 1px solid #484e54;padding-left: 5px; padding-right: 5px;}
