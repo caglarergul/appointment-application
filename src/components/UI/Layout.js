@@ -5,13 +5,13 @@ import React, {Component} from 'react';
 import Aux from '../hoc/Auxiliary';
 import Header from "./Header";
 import {BrowserRouter, Route} from 'react-router-dom';
-import HomePage from '../HomePage';
-import ShowCustomers from '../ShowCustomers';
-import AddCustomer from '../AddCustomer';
-import ShowPayments from '../ShowPayments';
-import ShowAppointments from '../ShowAppointments';
-import AddAppointment from '../AddAppointment';
-import AddPayment from '../AddPayment';
+import HomePage from '../Pages/HomePage';
+import ShowCustomers from '../Pages/ShowCustomers';
+import AddCustomer from '../Pages/AddCustomer';
+import ShowPayments from '../Pages/ShowPayments';
+import ShowAppointments from '../Pages/ShowAppointments';
+import AddAppointment from '../Pages/AddAppointment';
+import AddPayment from '../Pages/AddPayment';
 class Layout extends Component {
     render() {
         return (
