@@ -7,10 +7,9 @@ import axios from 'axios';
 
 
 const axios = (props, data) => (
-    return(
-      //axios.create("")
+
         <div></div>
-    );
-)
+
+);
 
 export default axios;
