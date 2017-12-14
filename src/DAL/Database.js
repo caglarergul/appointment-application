@@ -1,15 +1,7 @@
-/**
- * Created by caglarergul on 13.12.2017.
- */
-import React from 'react';
 import axios from 'axios';
 
+const instance = axios.create({
+    baseURL : 'https://appointment-app-8887b.firebaseio.com/'
+});
 
-
-const axios = (props, data) => (
-
-        <div></div>
-
-);
-
-export default axios;
+export default instance;

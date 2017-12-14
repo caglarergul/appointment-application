@@ -4,7 +4,7 @@
 import React, {Component} from 'react';
 import Aux from '../hoc/Auxiliary';
 import Header from "./Header";
-import {BrowserRouter, Route} from 'react-router-dom';
+import {BrowserRouter, Route } from 'react-router-dom';
 import HomePage from '../Pages/HomePage';
 import ShowCustomers from '../Pages/ShowCustomers';
 import AddCustomer from '../Pages/AddCustomer';
@@ -12,8 +12,16 @@ import ShowPayments from '../Pages/ShowPayments';
 import ShowAppointments from '../Pages/ShowAppointments';
 import AddAppointment from '../Pages/AddAppointment';
 import AddPayment from '../Pages/AddPayment';
+import PropTypes from 'prop-types';
+
 class Layout extends Component {
+
+    componentDidMount () {
+       // console.log(this.props);
+    }
     render() {
+
+
         return (
             <BrowserRouter>
                 <Aux>
@@ -36,6 +44,7 @@ class Layout extends Component {
         );
     }
 }
+
 
 
 export default Layout;
