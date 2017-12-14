@@ -2,7 +2,6 @@
  * Created by caglarergul on 13.12.2017.
  */
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
 
 class AddAppointment extends Component {
     render() {
@@ -14,6 +13,6 @@ class AddAppointment extends Component {
     }
 }
 
-AddAppointment.propTypes = {};
+
 
 export default AddAppointment;

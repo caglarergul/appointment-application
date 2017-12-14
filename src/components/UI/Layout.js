@@ -12,7 +12,7 @@ import ShowPayments from '../Pages/ShowPayments';
 import ShowAppointments from '../Pages/ShowAppointments';
 import AddAppointment from '../Pages/AddAppointment';
 import AddPayment from '../Pages/AddPayment';
-import PropTypes from 'prop-types';
+
 
 class Layout extends Component {
 

@@ -14,7 +14,11 @@ class AddCustomer extends Component {
         age: this.props.age,
         weight: this.props.weight,
         height: this.props.height,
-        targetWeight: this.props.targetWeight
+        targetWeight: this.props.targetWeight,
+        gender: this.props.gender,
+        disease: this.props.disease,
+        phone: this.props.phone,
+        address: this.props.address
     };
 
     addCustomerHandler = () => {
@@ -25,7 +29,10 @@ class AddCustomer extends Component {
             weight: this.state.weight,
             height: this.state.height,
             targetWeight: this.state.targetWeight,
-            disease: this.state.disease
+            disease: this.state.disease,
+            gender : this.state.gender,
+            phone: this.state.phone,
+            address: this.state.address
         };
 
 
@@ -58,20 +65,43 @@ class AddCustomer extends Component {
                            <label htmlFor="age">Age </label>
                            <input type="text" id="age" className="form-control" tabIndex="3" onChange={(event) => this.setState({age: event.target.value})}/>
                        </div>
+                       <div className="form-group">
+                           <label htmlFor="gender">Gender </label>
+                           <select className="form-control" id="gender" tabIndex="4" onChange={(event) => this.setState({gender: event.target.value})}>
+                               <option value="Male">Male</option>
+                               <option value="Female">Female</option>
+                               <option value="Other">Other</option>
+                           </select>
+
+
+
+                       </div>
+                       <div className="form-group">
+                           <label htmlFor="phone">Phone Number </label>
+                           <input type="text" id="phone" className="form-control" tabIndex="5" onChange={(event) => this.setState({phone: event.target.value})}/>
+                       </div>
                    </div>
 
                    <div className="col float-lg-right col-xs-12">
                        <div className="form-group">
+                           <label htmlFor="Address">Address </label>
+                           <input type="text" id="Address" className="form-control" tabIndex="6" onChange={(event) => this.setState({address: event.target.value})}/>
+                       </div>
+                       <div className="form-group">
                            <label htmlFor="Weight">Weight </label>
-                           <input type="text" id="Weight" className="form-control" tabIndex="4" onChange={(event) => this.setState({weight: event.target.value})}/>
+                           <input type="text" id="Weight" className="form-control" tabIndex="7" onChange={(event) => this.setState({weight: event.target.value})}/>
                        </div>
                        <div className="form-group">
                            <label htmlFor="Height">Height </label>
-                           <input type="text" id="Height" className="form-control" tabIndex="5" onChange={(event) => this.setState({height: event.target.value})}/>
+                           <input type="text" id="Height" className="form-control" tabIndex="8" onChange={(event) => this.setState({height: event.target.value})}/>
                        </div>
                        <div className="form-group">
                            <label htmlFor="Target">Target Weight </label>
-                           <input type="text" id="Target" className="form-control" tabIndex="6" onChange={(event) => this.setState({targetWeight: event.target.value})}/>
+                           <input type="text" id="Target" className="form-control" tabIndex="9" onChange={(event) => this.setState({targetWeight: event.target.value})}/>
+                       </div>
+                       <div className="form-group">
+                           <label htmlFor="disease">Disease </label>
+                           <input type="text" id="disease" className="form-control" tabIndex="10" onChange={(event) => this.setState({disease: event.target.value})}/>
                        </div>
                    </div>
 

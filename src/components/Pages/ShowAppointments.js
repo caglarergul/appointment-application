@@ -2,7 +2,7 @@
  * Created by caglarergul on 13.12.2017.
  */
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
+
 
 class ShowAppointments extends Component {
     render() {
@@ -14,6 +14,6 @@ class ShowAppointments extends Component {
     }
 }
 
-ShowAppointments.propTypes = {};
+
 
 export default ShowAppointments;
