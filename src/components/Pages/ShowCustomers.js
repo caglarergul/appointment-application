@@ -2,7 +2,7 @@
  * Created by caglarergul on 13.12.2017.
  */
 import React, {Component} from 'react';
-import axios from 'axios';
+import axios from '../../DAL/Database';
 import Aux from "../hoc/Auxiliary";
 import CustomerPartial from './Partial/CustomerPartial';
 
@@ -11,11 +11,11 @@ class ShowCustomers extends Component {
 
 
     componentDidMount() { // getting people from rest api w/ axios
-        axios.get("https://appointment-app-8887b.firebaseio.com/customer.json")
+        axios.get("/customer.json")
             .then(response => {
                 this.setState({customerList: response.data});
                 console.log(this.state.customerList);
-
+                console.log(response[0]);
             })
             .catch(error => {
                 this.setState({error: true});
@@ -28,7 +28,7 @@ class ShowCustomers extends Component {
 
     render() {
         const customers = Object.values(this.state.customerList).map((data, i) =>
-          <CustomerPartial key={i} firstName={data.firstName} surname={data.surname} age={data.age} gender={data.gender} phone={data.phone} />
+          <CustomerPartial key={i} id={i} firstName={data.firstName} surname={data.surname}  gender={data.gender} phone={data.phone} />
         );
 
         return (
@@ -40,12 +40,13 @@ class ShowCustomers extends Component {
                 <table className="table table-striped">
                     <thead className="thead-dark">
                     <tr>
-
+                        <th>#</th>
                         <th>Firstname</th>
                         <th>Surname</th>
                         <th>Gender</th>
-                        <th>Age</th>
+
                         <th>Phone</th>
+                        <th style={{width: "60px"}}>Details</th>
                     </tr>
                     </thead>
                     <tbody>
