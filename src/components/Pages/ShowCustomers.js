@@ -15,7 +15,6 @@ class ShowCustomers extends Component {
             .then(response => {
                 this.setState({customerList: response.data});
                 console.log(this.state.customerList);
-                console.log(response[0]);
             })
             .catch(error => {
                 this.setState({error: true});
@@ -28,7 +27,7 @@ class ShowCustomers extends Component {
 
     render() {
         const customers = Object.values(this.state.customerList).map((data, i) =>
-          <CustomerPartial key={i} id={i} firstName={data.firstName} surname={data.surname}  gender={data.gender} phone={data.phone} />
+          <CustomerPartial key={i} id={data.id} firstName={data.firstName} surname={data.surname}  gender={data.gender} phone={data.phone} />
         );
 
         return (

@@ -24,7 +24,6 @@ class AddCustomer extends Component {
 
     addCustomerHandler = () => {
 
-        console.log("id: "+ this.state.id);
         const customerData = {
             id: Math.round(Math.random()*10000),
             firstName: this.state.firstName,
@@ -42,7 +41,11 @@ class AddCustomer extends Component {
 
         axios.post('/customer.json', customerData)
             .then(response => {
-                console.log(response)
+
+                console.log(response);
+                document.getElementById("message").innerHTML("Successfull");
+
+
             })
             .catch(error => {
                 console.log("Error: "+error);
@@ -116,6 +119,8 @@ class AddCustomer extends Component {
                        &nbsp;
                        <button className="btn btn-secondary"  tabIndex="12"><i className="fa fa-refresh">&nbsp;</i> Reset Form</button>
                    </div>
+                   <div className="clearfix"></div>
+                   <div className="alert" id="message"></div>
                </div>
            </Aux>
         );
