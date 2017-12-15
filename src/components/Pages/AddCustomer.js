@@ -9,6 +9,7 @@ class AddCustomer extends Component {
 
 
     state = {
+        id : null,
         firstName: this.props.firstName,
         surname: this.props.surname,
         age: this.props.age,
@@ -22,7 +23,9 @@ class AddCustomer extends Component {
     };
 
     addCustomerHandler = () => {
+
         const customerData = {
+            id: Math.round(Math.random()*10000),
             firstName: this.state.firstName,
             surname: this.state.surname,
             age: this.state.age,
@@ -38,7 +41,11 @@ class AddCustomer extends Component {
 
         axios.post('/customer.json', customerData)
             .then(response => {
-                console.log(response)
+
+                console.log(response);
+                document.getElementById("message").innerHTML("Successfull");
+
+
             })
             .catch(error => {
                 console.log("Error: "+error);
@@ -108,10 +115,12 @@ class AddCustomer extends Component {
                </div>
                <div className="row">
                    <div className="col text-right">
-                       <button className="btn btn-success" tabIndex="7" onClick={this.addCustomerHandler}><i className="fa fa-plus">&nbsp;</i> Add Customer</button>
+                       <button className="btn btn-success" tabIndex="11" onClick={this.addCustomerHandler}><i className="fa fa-plus">&nbsp;</i> Add Customer</button>
                        &nbsp;
-                       <button className="btn btn-secondary"  tabIndex="8"><i className="fa fa-refresh">&nbsp;</i> Reset Form</button>
+                       <button className="btn btn-secondary"  tabIndex="12"><i className="fa fa-refresh">&nbsp;</i> Reset Form</button>
                    </div>
+                   <div className="clearfix"></div>
+                   <div className="alert" id="message"></div>
                </div>
            </Aux>
         );

@@ -12,7 +12,7 @@ import ShowPayments from '../Pages/ShowPayments';
 import ShowAppointments from '../Pages/ShowAppointments';
 import AddAppointment from '../Pages/AddAppointment';
 import AddPayment from '../Pages/AddPayment';
-
+import CustomerDetails from '../Pages/CustomerDetails';
 
 class Layout extends Component {
 
@@ -37,6 +37,7 @@ class Layout extends Component {
                             <Route path="/add-appointment" component={AddAppointment}/>
                             <Route path="/show-appointments" component={ShowAppointments}/>
                             <Route path="/show-payments" component={ShowPayments}/>
+                            <Route path="/customer/:id" component={CustomerDetails}/>
                         </main>
 
                 </Aux>
