@@ -15,18 +15,16 @@ class AddAppointment extends Component {
         super(props);
         this.state = {
             appointmentList : {
-                id : this.props.id,
-                date : this.props.date,
-                userId : this.props.userId,
+               // date : this.props.date,
+                userid : this.props.userid,
                 isFirst : this.props.isFirst,
-                startingWeight: this.props.startingWeight,
-                targetWeight : this.props.targetWeight,
                 isOnline: this.props.isOnline
             },
             customerList : [],
             startDate: moment()
         };
         this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
 
@@ -64,6 +62,7 @@ class AddAppointment extends Component {
             });
 
             console.log(this.state.customerList);
+
         });
     };
 
@@ -72,13 +71,19 @@ class AddAppointment extends Component {
         const appointmentRef = firebase.database().ref("appointment");
 
         const appointmentItem = {
-            id : this.state.id,
-            date : this.state.date,
-            userId : this.state.userId,
+            //date : this.state.date, date is undefined. we should solve this problem.
+            userid : this.state.userid,
             isFirst : this.state.isFirst,
             isOnline: this.state.isOnline
         };
+        debugger;
+        console.log(appointmentItem);
         appointmentRef.push(appointmentItem);
+        alert("Successfully Added!");
+
+        setTimeout(() => {
+            window.location = "/show-customers";
+        }, 1000);
     };
 
     handleChange(date) {
@@ -100,7 +105,8 @@ class AddAppointment extends Component {
                 <h2>Add a new appointment</h2>
                 <br/>
                 <div className="row">
-                    <div className="col-lg-6 float-lg-left col-xs-12">
+                    <div className="col-lg-2"></div>
+                    <div className="col-lg-8  col-xs-12">
                         <div className="form-group">
                             <label htmlFor="name">Select a customer </label>
                             <select className="form-control" id="gender" tabIndex="4" onChange={(event) => this.setState({userid: event.target.value})}>
@@ -110,57 +116,36 @@ class AddAppointment extends Component {
                         </div>
                         <div className="form-group">
                             <label htmlFor="surname">Date </label>
-                            <DatePicker selected={this.state.startDate} className="form-control" timeIntervals={15} showTimeSelect  timeFormat="HH:mm" dateFormat="DD-MMM HH:mm" onSelect={this.handleChange}>&nbsp;</DatePicker>
+                            <DatePicker selected={this.state.startDate}  className="form-control" value="15-Dec 17:47" timeIntervals={15} showTimeSelect  timeFormat="HH:mm" dateFormat="DD-MMM HH:mm" onSelect={this.handleChange}>&nbsp;</DatePicker>
                         </div>
+
                         <div className="form-group">
-                            <label htmlFor="age">Age </label>
-                            <input type="text" id="age" className="form-control" tabIndex="3" onChangeCapture={(event) => this.setState({gender: event.target.value}) }/>
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="gender">Gender </label>
-                            <select className="form-control" id="gender" tabIndex="4" onChange={(event) => this.setState({gender: event.target.value})}>
+                            <label htmlFor="isfirst">First Visit? </label>
+                            <select className="form-control" id="isfirst" tabIndex="4" onChange={(event) => this.setState({isFirst: event.target.value})}>
                                 <option value="None">Select...</option>
-                                <option value="Male">Male</option>
-                                <option value="Female">Female</option>
-                                <option value="Other">Other</option>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
                             </select>
 
 
 
                         </div>
                         <div className="form-group">
-                            <label htmlFor="phone">Phone Number </label>
-                            <input type="text" id="phone" className="form-control" tabIndex="5" onChange={(event) => this.setState({phone: event.target.value})}/>
+                            <label htmlFor="online">Online Appointment?</label>
+                            <select className="form-control" id="online" tabIndex="4" onChange={(event) => this.setState({isOnline: event.target.value})}>
+                                <option value="None">Select...</option>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                            </select>
                         </div>
                     </div>
 
-                    <div className="col float-lg-right col-xs-12">
-                        <div className="form-group">
-                            <label htmlFor="Address">Address </label>
-                            <input type="text" id="Address" className="form-control" tabIndex="6" onChange={(event) => this.setState({address: event.target.value})}/>
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="Weight">Weight </label>
-                            <input type="text" id="Weight" className="form-control" tabIndex="7" onChange={(event) => this.setState({weight: event.target.value})}/>
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="Height">Height </label>
-                            <input type="text" id="Height" className="form-control" tabIndex="8" onChange={(event) => this.setState({height: event.target.value})}/>
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="Target">Target Weight </label>
-                            <input type="text" id="Target" className="form-control" tabIndex="9" onChange={(event) => this.setState({targetWeight: event.target.value})}/>
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="disease">Disease </label>
-                            <input type="text" id="disease" className="form-control" tabIndex="10" onChange={(event) => this.setState({disease: event.target.value})}/>
-                        </div>
-                    </div>
 
+                    <div className="col-lg-2"></div>
                 </div>
                 <div className="row">
-                    <div className="col text-right">
-                        <button className="btn btn-success" tabIndex="11" onClick={this.handleSubmit}><i className="fa fa-plus">&nbsp;</i> Add Customer</button>
+                    <div className="col text-center">
+                        <button className="btn btn-success" tabIndex="11" onClick={this.handleSubmit}><i className="fa fa-plus">&nbsp;</i> Add Appointment</button>
                         &nbsp;
                         <button className="btn btn-secondary"  tabIndex="12"><i className="fa fa-refresh">&nbsp;</i> Reset Form</button>
                     </div>

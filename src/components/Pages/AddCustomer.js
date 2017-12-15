@@ -43,8 +43,11 @@ class AddCustomer extends Component {
             .then(response => {
 
                 console.log(response);
-                document.getElementById("message").innerHTML("Successfull");
+                alert("Successfully Added!");
 
+                setTimeout(() => {
+                    window.location = "/show-customers";
+                }, 1000);
 
             })
             .catch(error => {
