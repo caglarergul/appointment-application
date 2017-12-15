@@ -12,7 +12,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 
 class AddAppointment extends Component {
     constructor (props) {
-        super(props)
+        super(props);
         this.state = {
             appointmentList : {
                 id : this.props.id,
@@ -21,8 +21,6 @@ class AddAppointment extends Component {
                 isFirst : this.props.isFirst,
                 startingWeight: this.props.startingWeight,
                 targetWeight : this.props.targetWeight,
-                bmi : this.props.bmi,
-                basalMetabolicRate : this.props.basalMetabolicRate,
                 isOnline: this.props.isOnline
             },
             customerList : [],
@@ -78,10 +76,6 @@ class AddAppointment extends Component {
             date : this.state.date,
             userId : this.state.userId,
             isFirst : this.state.isFirst,
-            startingWeight: this.state.startingWeight,
-            targetWeight : this.state.targetWeight,
-            bmi : this.state.bmi,
-            basalMetabolicRate : this.state.basalMetabolicRate,
             isOnline: this.state.isOnline
         };
         appointmentRef.push(appointmentItem);
