@@ -1,5 +1,5 @@
 import React from 'react';
-import {NavLink} from 'react-router-dom';
+// import {NavLink} from 'react-router-dom';
 
 
 const customerPartial = (props) => (
@@ -9,7 +9,7 @@ const customerPartial = (props) => (
         <td>{props.surname}</td>
         <td>{props.gender}</td>
         <td>{props.phone}</td>
-        <td><NavLink to={"/customer/"+props.id} className="btn btn-primary btn-sm"> Show <i className="fa fa-caret-right"></i></NavLink>
+        <td><a href={"/customer/"+props.refid}  className="btn btn-primary btn-sm"> Show <i className="fa fa-caret-right"></i></a>
         </td>
     </tr>
 );
