@@ -93,19 +93,17 @@ class AddAppointment extends Component {
     }
 
     render() {
+
         let customers = this.state.customerList.map(data =>
             <option key={data.id} value={data.id}>{data.firstName + " " + data.surname}</option>
         );
-
-
-
 
         return (
             <Aux>
                 <h2>Add a new appointment</h2>
                 <br/>
                 <div className="row">
-                    <div className="col-lg-2"></div>
+                    <div className="col-lg-2">&nbsp;</div>
                     <div className="col-lg-8  col-xs-12">
                         <div className="form-group">
                             <label htmlFor="name">Select a customer </label>
@@ -141,7 +139,7 @@ class AddAppointment extends Component {
                     </div>
 
 
-                    <div className="col-lg-2"></div>
+                    <div className="col-lg-2">&nbsp;</div>
                 </div>
                 <div className="row">
                     <div className="col text-center">
