@@ -14,3 +14,7 @@
 }
 
 .nav-item {border-right: 1px solid #484e54;padding-left: 5px; padding-right: 5px;}
+
+ul.react-datepicker__time-list {
+    padding-left: 0 !important;
+}
