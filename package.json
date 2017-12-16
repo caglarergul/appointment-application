@@ -5,9 +5,11 @@
   "dependencies": {
     "axios": "^0.17.1",
     "bootstrap": "^4.0.0-beta.2",
+    "firebase": "^4.8.0",
     "jquery": "^1.9.1",
     "popper.js": "^1.12.9",
     "react": "^16.2.0",
+    "react-datepicker": "^0.62.0",
     "react-dom": "^16.2.0",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",

@@ -43,8 +43,11 @@ class AddCustomer extends Component {
             .then(response => {
 
                 console.log(response);
-                document.getElementById("message").innerHTML("Successfull");
+                alert("Successfully Added!");
 
+                setTimeout(() => {
+                    window.location = "/show-customers";
+                }, 1000);
 
             })
             .catch(error => {
@@ -70,11 +73,12 @@ class AddCustomer extends Component {
                        </div>
                        <div className="form-group">
                            <label htmlFor="age">Age </label>
-                           <input type="text" id="age" className="form-control" tabIndex="3" onChange={(event) => this.setState({age: event.target.value})}/>
+                           <input type="text" id="age" className="form-control" tabIndex="3" onChangeCapture={(event) => this.setState({gender: event.target.value}) }/>
                        </div>
                        <div className="form-group">
                            <label htmlFor="gender">Gender </label>
                            <select className="form-control" id="gender" tabIndex="4" onChange={(event) => this.setState({gender: event.target.value})}>
+                               <option value="None">Select...</option>
                                <option value="Male">Male</option>
                                <option value="Female">Female</option>
                                <option value="Other">Other</option>
