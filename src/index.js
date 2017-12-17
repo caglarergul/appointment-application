@@ -5,7 +5,7 @@ import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import 'bootstrap/dist/css/bootstrap.css';
 
-import 'jquery/dist/jquery.min';
+import 'jquery/jquery.min';
 import 'bootstrap/dist/js/bootstrap.min';
 import './assets/css/master.css';
 

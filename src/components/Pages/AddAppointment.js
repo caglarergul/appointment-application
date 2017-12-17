@@ -4,35 +4,28 @@
 import React, {Component} from 'react';
 import firebase from '../../DAL/firebase';
 import Aux from "../hoc/Auxiliary";
-import DatePicker from 'react-datepicker';
+import DateTime from 'react-datetime';
+import 'react-datetime/css/react-datetime.css';
 import moment from 'moment';
+import 'moment/locale/tr';
 
-
-import 'react-datepicker/dist/react-datepicker.css';
 
 class AddAppointment extends Component {
-    constructor (props) {
-        super(props);
-        this.state = {
-            appointmentList : {
-               // date : this.props.date,
-                userid : this.props.userid,
-                isFirst : this.props.isFirst,
-                isOnline: this.props.isOnline
-            },
-            customerList : [],
-            startDate: moment()
-        };
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-    }
+    state = {
+        id: "",
+        isFirst: "",
+        isOnline: "",
+        date: "",
+        customerList: [],
+        startDate: moment().format('llll')
+    };
+
 
 
     componentDidMount() {
         this.getCustomers();
 
     }
-
 
     getCustomers = () => {
 
@@ -68,29 +61,42 @@ class AddAppointment extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
+        debugger;
         const appointmentRef = firebase.database().ref("appointment");
 
         const appointmentItem = {
-            //date : this.state.date, date is undefined. we should solve this problem.
-            userid : this.state.userid,
+            id : this.state.id,
+            date: this.state.date,
             isFirst : this.state.isFirst,
-            isOnline: this.state.isOnline
+            isOnline : this.state.isOnline
         };
-        debugger;
-        console.log(appointmentItem);
+
+        console.log(" AppointmentItem: " + appointmentItem);
         appointmentRef.push(appointmentItem);
         alert("Successfully Added!");
 
-        setTimeout(() => {
+        /*setTimeout(() => {
             window.location = "/show-customers";
-        }, 1000);
+        }, 1000);*/
     };
 
-    handleChange(date) {
-        this.setState({
-            startDate: date
-        });
-    }
+    changeValue = (value, type) => {
+        console.log(this.state);
+        // debugger;
+        if (type !== undefined) {
+            if (type === "id") {
+                return this.setState({id: value});
+            } else if (type === "isFirst") {
+                return this.setState({isFirst: value});
+            } else if (type === "isOnline") {
+                return  this.setState({isOnline: value});
+            }
+        } else {
+            return  this.setState({date: value._d.toString()});
+        }
+        console.log(this.state);
+    };
+
 
     render() {
 
@@ -107,30 +113,33 @@ class AddAppointment extends Component {
                     <div className="col-lg-8  col-xs-12">
                         <div className="form-group">
                             <label htmlFor="name">Select a customer </label>
-                            <select className="form-control" id="gender" tabIndex="4" onChange={(event) => this.setState({userid: event.target.value})}>
+                            <select className="form-control" id="gender" tabIndex="4"
+                                    onChange={(event) => this.changeValue(event.target.value, "id")}>
                                 <option value="None">Select...</option>
                                 {customers}
                             </select>
                         </div>
                         <div className="form-group">
                             <label htmlFor="surname">Date </label>
-                            <DatePicker selected={this.state.startDate}  className="form-control" value="15-Dec 17:47" timeIntervals={15} showTimeSelect  timeFormat="HH:mm" dateFormat="DD-MMM HH:mm" onSelect={this.handleChange}>&nbsp;</DatePicker>
+                            <DateTime className="form-control"
+                                      onChange={this.changeValue}>&nbsp;</DateTime>
                         </div>
 
                         <div className="form-group">
                             <label htmlFor="isfirst">First Visit? </label>
-                            <select className="form-control" id="isfirst" tabIndex="4" onChange={(event) => this.setState({isFirst: event.target.value})}>
+                            <select className="form-control" id="isfirst" tabIndex="4"
+                                    onChange={(event) => this.changeValue(event.target.value, "isFirst")}>
                                 <option value="None">Select...</option>
                                 <option value="Yes">Yes</option>
                                 <option value="No">No</option>
                             </select>
 
 
-
                         </div>
                         <div className="form-group">
                             <label htmlFor="online">Online Appointment?</label>
-                            <select className="form-control" id="online" tabIndex="4" onChange={(event) => this.setState({isOnline: event.target.value})}>
+                            <select className="form-control" id="online" tabIndex="4"
+                                    onChange={(event) => this.changeValue(event.target.value, "isOnline")}>
                                 <option value="None">Select...</option>
                                 <option value="Yes">Yes</option>
                                 <option value="No">No</option>
@@ -143,9 +152,13 @@ class AddAppointment extends Component {
                 </div>
                 <div className="row">
                     <div className="col text-center">
-                        <button className="btn btn-success" tabIndex="11" onClick={this.handleSubmit}><i className="fa fa-plus">&nbsp;</i> Add Appointment</button>
+                        <button className="btn btn-success" tabIndex="11" onClick={this.handleSubmit}><i
+                            className="fa fa-plus">&nbsp;</i> Add Appointment
+                        </button>
                         &nbsp;
-                        <button className="btn btn-secondary"  tabIndex="12"><i className="fa fa-refresh">&nbsp;</i> Reset Form</button>
+                        <button className="btn btn-secondary" tabIndex="12"><i className="fa fa-refresh">&nbsp;</i>
+                            Reset Form
+                        </button>
                     </div>
                     <div className="clearfix"></div>
                     <div className="alert" id="message"></div>
@@ -154,7 +167,6 @@ class AddAppointment extends Component {
         );
     }
 }
-
 
 
 export default AddAppointment;
