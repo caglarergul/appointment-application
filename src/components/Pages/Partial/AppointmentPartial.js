@@ -4,7 +4,7 @@ import React from 'react';
 
 const appointmentPartial = (props) => (
     <tr>
-        <th>{props.app_id}</th>
+        <th>{props.nameSurname}</th>
         <th scope="row">{props.user_id}</th>
         <td>{props.date}</td>
         <td>{props.isFirst}</td>

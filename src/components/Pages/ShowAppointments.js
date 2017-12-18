@@ -30,36 +30,40 @@ class ShowAppointments extends Component {
                     app_id: item,
                     user_id: items[item].id,
                     isFirst: items[item].isFirst,
-                    namesurname : "",
+                    nameSurname : "1: "+ this.getCustomerNameHandler(items[item].id),
                     isOnline: items[item].isOnline,
                     date: moment(items[item].date).format('d MMMM YYYY - h:mm a')
                 });
+
             }
             this.setState({
                 appointmentList: newStateCustomer
             });
-
             console.log(this.state.appointmentList);
 
         });
     };
 
-    getCustomerNameHandler = () => {
+    getCustomerNameHandler = (USER_ID) => {
+        let namesurname = "";
+
         const rows = firebase.database().ref('customer');
         rows.on('value', (snapshot) => {
             let items = snapshot.val();
-            let newStateCustomer = [];
+           // let newStateCustomer = [];
             for (let item in items) {
-                newStateCustomer.push({
-                    user_id: item,
-                    uid: items[item].id,
-                    firstName: items[item].firstName,
-                    surname: items[item].surname,
-                });
+                //debugger;
+                if (USER_ID === item) {
 
-                return
+                    console.log("user id:" + USER_ID + " app user id: "+ item);
+                    namesurname = items[item].firstName + items[item].surname;
+                    console.log("name surname: " + namesurname);
+
+                }else {
+
+                }
             }
-
+            return namesurname;
 
 
         });
@@ -70,7 +74,7 @@ class ShowAppointments extends Component {
     render() {
 
         const appointments = Object.values(this.state.appointmentList).map((data) =>
-            <AppPartial key={data.app_id} refid={data.app_id} id={data.user_id} namesurname={data.namesurname} date={data.date} isOnline={data.isOnline} isFirst={data.isFirst} />
+            <AppPartial key={data.app_id} refid={data.app_id} id={data.user_id} nameSurname={data.nameSurname} date={data.date} isOnline={data.isOnline} isFirst={data.isFirst} />
         );
 
         return (
