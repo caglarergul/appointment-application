@@ -75,9 +75,9 @@ class AddAppointment extends Component {
         appointmentRef.push(appointmentItem);
         alert("Successfully Added!");
 
-        /*setTimeout(() => {
-            window.location = "/show-customers";
-        }, 1000);*/
+        setTimeout(() => {
+            window.location = "/add-appointment";
+        }, 1000);
     };
 
     changeValue = (value, type) => {
