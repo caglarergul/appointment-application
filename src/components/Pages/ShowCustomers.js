@@ -53,8 +53,6 @@ class ShowCustomers extends Component {
             <Aux>
                 <h2>All Customers</h2>
                 <br/>
-
-
                 <table className="table table-striped">
                     <thead className="thead-dark">
                     <tr>
