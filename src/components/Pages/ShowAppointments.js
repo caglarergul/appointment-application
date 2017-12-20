@@ -12,10 +12,11 @@ class ShowAppointments extends Component {
 
     state = {
         appointmentList: [],
-        customerList: []
+        customerList: [],
+        resultList: []
     };
 
-    componentDidMount () {
+    componentDidMount() {
         moment().format();
         this.showAppointments();
     }
@@ -27,54 +28,80 @@ class ShowAppointments extends Component {
             let newStateCustomer = [];
             for (let item in items) {
                 newStateCustomer.push({
-                    app_id: item,
-                    user_id: items[item].id,
+                    __app_uid: item,
+                    id: items[item].id,
                     isFirst: items[item].isFirst,
-                    nameSurname : "1: "+ this.getCustomerNameHandler(items[item].id),
                     isOnline: items[item].isOnline,
                     date: moment(items[item].date).format('d MMMM YYYY - h:mm a')
                 });
-
             }
-            this.setState({
-                appointmentList: newStateCustomer
-            });
-            console.log(this.state.appointmentList);
+
+            this.getCustomerNameHandler(newStateCustomer);
 
         });
+
+
     };
 
-    getCustomerNameHandler = (USER_ID) => {
-        let namesurname = "";
+    getCustomerNameHandler = (appObject) => {
+
+        let newStateCustomer = [];
+
 
         const rows = firebase.database().ref('customer');
         rows.on('value', (snapshot) => {
             let items = snapshot.val();
-           // let newStateCustomer = [];
             for (let item in items) {
-                //debugger;
-                if (USER_ID === item) {
+                newStateCustomer.push({
+                    __customer_uid: item,
+                    id: items[item].id,
+                    firstName: items[item].firstName,
+                    surname: items[item].surname
+                });
+                // calling username and surname.
 
-                    console.log("user id:" + USER_ID + " app user id: "+ item);
-                    namesurname = items[item].firstName + items[item].surname;
-                    console.log("name surname: " + namesurname);
-
-                }else {
-
-                }
             }
-            return namesurname;
+            this.setState({appointmentList: appObject});
+            this.setState({customerList: newStateCustomer});
+            //console.log(this.state);
+            let newList = [];
+            this.state.appointmentList.map(app => {
 
+
+                this.state.customerList.map(cus => {
+                    if (app.id === cus.__customer_uid) {
+                        console.log("eşleşti!" + cus.firstName);
+
+                        newList.push({
+                            app_id: app.__app_uid,
+                            id: app.id,
+                            customer_id: cus.id,
+                            firstname: cus.firstName,
+                            surname: cus.surname,
+                            date: app.date,
+                            isFirst: app.isFirst,
+                            isOnline: app.isOnline
+                        });
+
+                        return this.setState({resultList: newList});
+                    } else {
+                        return this.setState({resultList: newList});
+                    }
+                });
+                return this.setState({resultList: newList});
+            });
 
         });
+
+
     };
 
 
-
     render() {
-
-        const appointments = Object.values(this.state.appointmentList).map((data) =>
-            <AppPartial key={data.app_id} refid={data.app_id} id={data.user_id} nameSurname={data.nameSurname} date={data.date} isOnline={data.isOnline} isFirst={data.isFirst} />
+        console.log(this.state);
+        const appointments = Object.values(this.state.resultList).map((data, igKey) =>
+            <AppPartial key={igKey} refid={data.app_id} id={data.customer_id} nameSurname={data.firstname + " " + data.surname} date={data.date}
+                        isOnline={data.isOnline} isFirst={data.isFirst}/>
         );
 
         return (
@@ -86,9 +113,9 @@ class ShowAppointments extends Component {
                         <th>#</th>
                         <th>Name Surname</th>
                         <th>Surname</th>
-                        <th>Gender</th>
+                        <th>First Appointment?</th>
 
-                        <th>Phone</th>
+                        <th>Online Appointment?</th>
                         <th style={{width: "60px"}}>Details</th>
                     </tr>
                     </thead>
@@ -100,7 +127,6 @@ class ShowAppointments extends Component {
         );
     }
 }
-
 
 
 export default ShowAppointments;
