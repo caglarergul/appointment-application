@@ -48,7 +48,7 @@ class AppointmentDetails extends Component {
             for (let i in this.state.appointmentList) {
                 console.log("customerId: "+ this.state.personDetail.id + " - cus_id: "+this.state.appointmentList[i].cus_id)
 
-                if (this.state.personDetail.id == this.state.appointmentList[i].cus_id) {
+                if (this.state.personDetail.id === this.state.appointmentList[i].cus_id) {
                     this.setState({appointmentDetail: this.state.appointmentList[i]});
                     console.log(this.state.appointmentDetail);
                 }else {
@@ -89,7 +89,7 @@ class AppointmentDetails extends Component {
             for (let i in this.state.customerList) {
                 console.log("customerId: "+ this.state.customerId + " - cus_id: "+this.state.customerList[i].cus_id)
 
-                if (this.state.customerId == this.state.customerList[i].cus_id) {
+                if (this.state.customerId === this.state.customerList[i].cus_id) {
                     this.setState({personDetail: this.state.customerList[i]});
                     console.log(this.state.personDetail);
                 }else {
@@ -99,6 +99,30 @@ class AppointmentDetails extends Component {
 
         });
     };
+
+
+    finishSubmitHandler = () => {
+        this.state.appointmentDetail.isOver = "Yes";
+        console.log(this.state.appointmentDetail);
+       const itemsRef = firebase.database().ref('appointment');
+        itemsRef
+            .child(this.state.appointmentDetail.id)
+            .update(this.state.appointmentDetail)
+            .then(() => itemsRef.once('value'))
+            .then(snapshot => snapshot.val())
+            .catch(error => ({
+                errorCode: error.code,
+                errorMessage: error.message
+            }));
+
+        alert("Appointment is finished successfully!");
+
+        setTimeout(() => {
+            window.location = "/show-appointments";
+        }, 1000);
+    };
+
+
     render() {
 
 
@@ -199,7 +223,7 @@ class AppointmentDetails extends Component {
                         </div>
                         <div className="clearfix" style={{marginTop:"30px"}}>
                             <div className="btn-group">
-                                <button className="btn btn-outline-success"><i className="fa fa-check"></i> Finish Appointment</button>
+                                <button className="btn btn-outline-success" onClick={this.finishSubmitHandler}><i className="fa fa-check"></i> Finish Appointment</button>
                                 <button className="btn btn-outline-primary"><i className="fa fa-edit"></i> Add Note</button>
                                 <button className="btn btn-outline-danger"><i className="fa fa-times"></i> Delete Appointment</button>
                             </div>
