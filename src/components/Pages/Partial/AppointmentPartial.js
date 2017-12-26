@@ -7,7 +7,7 @@ const appointmentPartial = (props) => (
         <td>{props.date}</td>
         <td>{props.isFirst}</td>
         <td>{props.isOnline}</td>
-        <td><a href={"/appointments/"+props.refid}  className="btn btn-primary btn-sm"> Show <i className="fa fa-caret-right"></i></a>
+        <td><a href={"/appointments/"+props.id+"/"+props.refid}  className="btn btn-primary btn-sm"> Show <i className="fa fa-caret-right"></i></a>
         </td>
     </tr>
 );

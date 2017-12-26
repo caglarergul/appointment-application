@@ -4,6 +4,7 @@
 import React, {Component} from 'react';
 import Aux from "../hoc/Auxiliary";
 import firebase from 'firebase';
+import DateTime from 'react-datetime';
 import AppPartial from './Partial/AppointmentPartial';
 import moment from 'moment';
 import 'moment/locale/tr';
@@ -32,7 +33,8 @@ class ShowAppointments extends Component {
                     id: items[item].id,
                     isFirst: items[item].isFirst,
                     isOnline: items[item].isOnline,
-                    date: moment(items[item].date).format('d MMMM YYYY - h:mm a')
+                    isOver : items[item].isOver,
+                    date: items[item].date
                 });
             }
 
@@ -80,7 +82,8 @@ class ShowAppointments extends Component {
                             surname: cus.surname,
                             date: app.date,
                             isFirst: app.isFirst,
-                            isOnline: app.isOnline
+                            isOnline: app.isOnline,
+                            isOver: app.isOver
                         });
 
                         return this.setState({resultList: newList});
@@ -101,7 +104,7 @@ class ShowAppointments extends Component {
         console.log(this.state);
         const appointments = Object.values(this.state.resultList).map((data, igKey) =>
             <AppPartial key={igKey} refid={data.app_id} id={data.customer_id} nameSurname={data.firstname + " " + data.surname} date={data.date}
-                        isOnline={data.isOnline} isFirst={data.isFirst}/>
+                        isOnline={data.isOnline} isFirst={data.isFirst} isOver={data.isOver}/>
         );
 
         return (

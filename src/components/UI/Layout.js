@@ -13,7 +13,7 @@ import ShowAppointments from '../Pages/ShowAppointments';
 import AddAppointment from '../Pages/AddAppointment';
 import AddPayment from '../Pages/AddPayment';
 import CustomerDetails from '../Pages/CustomerDetails';
-
+import AppointmentDetails from '../Pages/AppointmentDetails';
 class Layout extends Component {
 
     componentDidMount () {
@@ -38,6 +38,7 @@ class Layout extends Component {
                             <Route path="/show-appointments" component={ShowAppointments}/>
                             <Route path="/show-payments" component={ShowPayments}/>
                             <Route path="/customer/:id" component={CustomerDetails}/>
+                            <Route path="/appointments/:id/:refid" component={AppointmentDetails}/>
                         </main>
 
                 </Aux>

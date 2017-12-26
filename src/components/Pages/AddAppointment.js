@@ -17,13 +17,16 @@ class AddAppointment extends Component {
         isOnline: "",
         date: "",
         customerList: [],
-        startDate: moment().format('llll')
+        startDate: moment().format('D/MM/YYYY HH:mm')
     };
 
 
 
     componentDidMount() {
+        moment().format();
         this.getCustomers();
+
+        console.log(moment("Fri Dec 22 2017 00:00:00 GMT+0300 (+03)").format('D/MM/YYYY HH:mm'));
 
     }
 
@@ -61,14 +64,15 @@ class AddAppointment extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        debugger;
+        ///debugger;
         const appointmentRef = firebase.database().ref("appointment");
 
         const appointmentItem = {
             id : this.state.id,
             date: this.state.date,
             isFirst : this.state.isFirst,
-            isOnline : this.state.isOnline
+            isOnline : this.state.isOnline,
+            isOver : "No"
         };
 
         console.log(" AppointmentItem: " + appointmentItem);
@@ -82,7 +86,7 @@ class AddAppointment extends Component {
 
     changeValue = (value, type) => {
         console.log(this.state);
-        // debugger;
+        //debugger;
         if (type !== undefined) {
             if (type === "id") {
                 return this.setState({id: value});
@@ -92,7 +96,7 @@ class AddAppointment extends Component {
                 return  this.setState({isOnline: value});
             }
         } else {
-            return  this.setState({date: value._d.toString()});
+            return  this.setState({date: moment(value._d.toString()).format('D/MM/YYYY HH:mm')});
         }
         console.log(this.state);
     };
